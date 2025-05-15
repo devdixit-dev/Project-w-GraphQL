@@ -1,5 +1,6 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
+import cors from cors
 
 const users = [
   {
@@ -79,7 +80,11 @@ const resolvers = {
 const server = new ApolloServer({typeDefs, resolvers});
 
 const { url } = await startStandaloneServer(server, {
-  listen: {port: 4000}
+  listen: {port: 4000},
+  context: () => {},
+  cors: {
+    origin: 'http://localhost:5173/'
+  }
 });
 
 console.log(`Server running at: ${url}`);
