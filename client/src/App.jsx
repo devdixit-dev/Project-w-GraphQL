@@ -23,14 +23,13 @@ const App = () => {
     <>
       <h1>Users</h1>
       <div>
-        {data.getUsers.map((user) => {
+        {data.getUsers.map((user) => (
           <div key={user.id}>
-            <p>User ID: {user.id}</p>
             <p>Name: {user.name}</p>
             <p>Age: {user.age}</p>
-            <p>Student ?: {user.isStudent}</p>
+            <p>Student: {user.isStudent ? "Yes": "No"}</p>
           </div>
-        })}
+        ))}
       </div>
     </>
   )

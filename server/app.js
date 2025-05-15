@@ -1,6 +1,5 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import cors from cors
 
 const users = [
   {
