@@ -56,14 +56,14 @@ const resolvers = {
     getUsers: () => {
       return users;
     },
-    getUserById: (userData, user) => {
-      const id = user.id
-      return users.find((findUser) => findUser.id === id)
+    getUserById: (parent, args) => {
+      const id = parseInt(args.id); // assuming ids are numbers
+      return users.find(user => user.id === id);
     }
   },
   Mutation: {
-    createUser: (parent, body) => {
-      const { name, age, isStudent } = body;
+    createUser: (parent, args) => {
+      const { name, age, isStudent } = args;
       const newUser = {
         id: (users.length + 1).toString(),
         name,
@@ -72,15 +72,16 @@ const resolvers = {
       };
 
       users.push(newUser);
+      return newUser
     }
   }
 }
 
-const server = new ApolloServer({typeDefs, resolvers});
+const server = new ApolloServer({ typeDefs, resolvers });
 
 const { url } = await startStandaloneServer(server, {
-  listen: {port: 4000},
-  context: () => {},
+  listen: { port: 4000 },
+  context: () => { },
   cors: {
     origin: 'http://localhost:5173/'
   }
